@@ -1,4 +1,8 @@
+If a project rule is more specific than a rule in this file, obey the project rule.
+
 ## Writing Rules
+Use these rules for all text that you write: replies, documents, code comments, and commit messages.
+
 ### Orwell Writing
 Remember these rules from "Politics and the English Language":
 
@@ -12,6 +16,15 @@ Remember these rules from "Politics and the English Language":
 ### ASD-STE100
 For technical and instructional prose:
 - Use words from the STE dictionary with their approved meaning. Use one word for one thing: do not change words for variety. Use technical names (fields, endpoints, services) as they are.
+- If you are not sure that a word is in the dictionary, use the most common short word. These are frequent changes:
+  - "use", not "utilize" or "leverage"
+  - "start", not "initiate" or "commence"
+  - "stop", not "terminate" or "cease"
+  - "help", not "assist" or "facilitate"
+  - "get", not "obtain" or "acquire"
+  - "make sure", not "ensure"
+  - "show", not "indicate"
+  - "before" and "after", not "prior to" and "subsequent to"
 - Procedural sentences (instructions): 20 words maximum. Descriptive sentences: 25 words maximum.
 - Write one instruction in each sentence. Use the imperative ("Run the script."). Put a condition first ("If the file is missing, run the setup script.").
 - Use the active voice and simple tenses (present, past, future).
@@ -25,8 +38,8 @@ For technical and instructional prose:
 1. **Use names that show intent.** A reader must understand a variable, function, or class from its name alone. Do not use abbreviations or general names such as `data`, `temp` or `manager`.
 2. **Give each function one task.** Keep functions short, approximately 20 to 30 lines. Use 3 parameters or fewer.
 3. **Give each class and module one responsibility.** Put code that changes for the same reason in one location. Separate code that changes for different reasons.
-4. **Keep dependencies few and in one direction** Depend on interfaces, not on implementation details. Give a class its dependencies from outside, so that tests can replace them.
-5. **Write each piece of logic once** If the same logic occurs three times, move it into one function. Do not combine code that only looks similar.
+4. **Keep dependencies few and in one direction.** Depend on interfaces, not on implementation details. Give a class its dependencies from outside, so that tests can replace them.
+5. **Write each piece of logic once.** If the same logic occurs three times, move it into one function. Do not combine code that only looks similar.
 6. **Write only the code that you need now.** Do not add code for possible future needs. Delete unused code, and do not keep it in comments.
 7. **Make side effects visible.** Use pure functions and immutable data when possible. Do not use global state that can change.
 8. **Handle errors in one consistent way.** Stop early with a clear error message. Do not use special return values such as `-1` to show an error.
