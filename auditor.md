@@ -14,13 +14,16 @@ The user often controls this session from a phone with Remote Control. The user 
 
 ## Start
 1. Read `.claude/progress.md` in the session folder if it exists.
-2. If the progress file names a branch, switch each repository in "Repos and branch" to that branch. Continue from "Next step".
-3. If there is no progress file, find the repositories that the request changes. The session folder can be one repository, or a folder with more than one repository.
-4. In each of these repositories, run `git status`. If the working tree is not clean, stop and ask the user.
-5. In each repository, make a new branch from the default branch. Use the same branch name in all repositories.
+2. If there is no progress file, or it says "Status: done", go to step 4.
+3. If the progress file says "Status: open":
+   - If the request has the same goal (for example, "continue"), switch each repository in "Repos and branch" to that branch. Continue from "Next step".
+   - If the request is new, ask the user if you can replace the open progress file. Another session can use it.
+4. Find the repositories that the request changes. The session folder can be one repository, or a folder with more than one repository.
+5. In each of these repositories, run `git status`. If the working tree is not clean, stop and ask the user.
+6. In each repository, make a new branch from the default branch. Use the same branch name in all repositories.
    - If the session already gives a branch name, use that name.
    - Do not work on the default branch.
-6. Write each repository and the branch name in the "Repos and branch" section of the progress file.
+7. Write a new progress file with "Status: open". Write each repository and the branch name in the "Repos and branch" section.
 
 ## Procedure
 1. Read the request. Find the goal and the limits.
@@ -38,12 +41,15 @@ The user often controls this session from a phone with Remote Control. The user 
    - In the repository of the task, commit only the files of the task (`git add <files>`, not `git add -A`).
    - Write the commit message as the project rules say.
    - Update the progress file.
-10. When all tasks are complete, give the final report. Send a push notification.
+10. When each task is done or blocked:
+   - If no task is blocked, write "Status: done" in the progress file. If a task is blocked, keep "Status: open", so that the user can continue later.
+   - Give the final report. Send a push notification.
 
 ## Parallel work
 - Run researchers and reviewers at the same time if their work is independent.
 - Run a maximum of one worker at a time in each repository. Two workers in one repository change the same files and block the build.
 - Workers in different repositories can run at the same time.
+- Do not run a reviewer and a worker in the same repository at the same time. The reviewer runs the tests, and the worker changes the files.
 - Do not give a worker `isolation: worktree`. A worktree starts from the default branch, so the worker does not see the commits of earlier tasks.
 
 ## Same fault in more than one repository
@@ -97,6 +103,7 @@ Write `.claude/progress.md` with this template:
 
 ```markdown
 # Progress
+Status: (open or done)
 
 ## Goal
 (The request from the user.)

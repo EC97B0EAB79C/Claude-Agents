@@ -1,4 +1,5 @@
 # Progress
+Status: (open or done)
 
 ## Goal
 (The request from the user.)
