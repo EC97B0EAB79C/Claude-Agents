@@ -2,6 +2,7 @@
 name: researcher
 description: Reads code and documents, then gives organized facts. Read-only. Use before planning or to find files.
 model: haiku
+effort: medium
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 30
 ---

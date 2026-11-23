@@ -2,6 +2,7 @@
 name: worker
 description: Does one task that the auditor gives. Changes code and documents, and runs the checks.
 model: sonnet
+effort: high
 tools: Read, Edit, Write, Bash, Grep, Glob
 permissionMode: acceptEdits
 maxTurns: 60

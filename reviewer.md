@@ -2,6 +2,7 @@
 name: reviewer
 description: Reviews a change from the worker and finds faults. Read-only. Use for important changes.
 model: sonnet
+effort: high
 tools: Read, Grep, Glob, Bash
 maxTurns: 40
 ---
