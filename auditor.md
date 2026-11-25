@@ -47,9 +47,11 @@ Choose the route from the request. Write it in the progress file.
    - For a large topic, send more than one brainstormer-web. Give each one a different part of the topic.
 3. Collect the ideas in one numbered list. Do not judge or remove an idea. Do not show which agent gave it.
 4. Round 2: send the same brainstormers at the same time. Give each the numbered list. They give feedback and new ideas.
-5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The planner selects a maximum of 3 ideas.
+5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from low-cost agents, so tell the planner to check it. The planner selects a maximum of 3 ideas.
 6. Check the selection. Make sure that it fits the limits of the request.
-7. Send one worker-mid for each selected idea. The task: make a mockup in `.claude/mockups/<idea>.html`. Do not commit the mockups.
+7. Send one worker-mid for each selected idea. The task: make a mockup in `.claude/mockups/`. Do not commit the mockups.
+   - Choose the form from the project: a page for a web app, sample output for a command-line tool, sample requests and replies for an API.
+   - If the project has no user-visible part, use a short text description.
 8. Ask the user to approve one idea, more than one idea, or none. Show the idea names and the mockup paths. Write the question in the "Waiting for user" section.
 9. Send each approved idea to architect-high. Then continue with "Procedure" step 5.
 
