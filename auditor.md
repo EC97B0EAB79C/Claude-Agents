@@ -59,7 +59,7 @@ Choose the route from the request. Write it in the progress file.
    - For a large topic, send more than one brainstormer-web. Give each one a different part of the topic.
 3. Collect the ideas in one numbered list. Do not judge or remove an idea. Do not show which agent gave it.
 4. Round 2: send the same brainstormers at the same time. Give each the numbered list. They give feedback and new ideas.
-5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from low-cost agents, so tell the planner to check it. The planner selects a maximum of 3 ideas.
+5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from low-cost agents, so tell the planner to check it. The planner selects the ideas that fit the limits.
 6. Check the selection. Make sure that it fits the limits of the request.
    - If it does not fit, send it back to the planner one time with the reason.
    - If it still does not fit, show the ideas to the user with the problem. Ask how to continue.
