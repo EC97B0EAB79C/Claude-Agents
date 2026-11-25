@@ -46,6 +46,8 @@ Choose the route from the request. Write it in the progress file.
 ## Quick ideas
 1. Send one brainstormer-web with the topic, the files, and the limits. Ask for a maximum of 5 ideas, each with the file and line of the problem.
 2. Check each idea against the code. Remove an idea that is not true.
+   - If you remove all ideas, tell the user. Ask if the user wants another round (Idea flow) or to stop.
+   - If the user stops, write "Status: done" in the progress file.
 3. Show the ideas to the user. Ask which ideas the user selects. Ask if the user wants mockups of them. Write the questions in the "Waiting for user" section.
 4. If the user wants mockups, continue with "Idea flow" steps 7 to 9.
    - Then, or if the user wants no mockups, choose the route of each selected idea from the route table. For example, use architect-low for a small feature.
@@ -59,17 +61,24 @@ Choose the route from the request. Write it in the progress file.
 4. Round 2: send the same brainstormers at the same time. Give each the numbered list. They give feedback and new ideas.
 5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from low-cost agents, so tell the planner to check it. The planner selects a maximum of 3 ideas.
 6. Check the selection. Make sure that it fits the limits of the request.
+   - If it does not fit, send it back to the planner one time with the reason.
+   - If it still does not fit, show the ideas to the user with the problem. Ask how to continue.
 7. Send one worker-mid for each selected idea. The task: make a mockup of the idea.
    - If the project rules say where and how to make mockups, follow them. They can ask for a commit with a proposal.
-   - If the project has no mockup rules, write the mockup in `.claude/mockups/` of the session folder. Do not commit it.
+   - If the project has no mockup rules, write the mockup in `.claude/mockups/` of the session folder. Do not commit it. In the mockup task, name the session folder as the **Repository**, because workers run all commands in the Repository of the task.
    - Choose the form from the project: a page for a web app, a screen for a mobile app, sample output for a command-line tool, sample requests and replies for an API.
    - If the project has no user-visible part, use a short text description.
    - Give each mockup worker its own file names, so that two workers never write the same file.
+   - Write "Checks: none (do not run the build or the tests)" in the mockup task. The worker checks the mockup itself, for example it opens each image.
 8. Show the user each idea name and its mockup path. Ask the user to choose for each idea: approve, change, or drop. Write the question in the "Waiting for user" section.
+   - Add the open questions of the planner to this question.
+   - If the user drops all ideas, tell the user. Ask if the user wants another round (Idea flow) or to stop.
+   - If the user stops, write "Status: done" in the progress file.
 9. If the user asks for a change, send it to a mockup worker with the user's words, the mockup path, and the idea. Then ask again (step 8).
    - A change can ask for variants, for example "show 3 places for the icon".
    - Write each round in the "Ideas" section of the progress file.
-10. Send each approved idea to architect-high. Then continue with "Procedure" step 5.
+10. If the project rules want mockups in a commit (for example with a proposal), commit the mockups of the approved ideas now. Do this before the code.
+    - Then continue with "Procedure" step 4. The architect is architect-high. Give it each approved idea.
 
 ## Procedure
 1. Read the request. Find the goal and the limits.
@@ -134,7 +143,7 @@ A change is important if one or more of these items is true:
 
 ## Decisions
 - For small questions, use the best choice. Write it in the progress file and in the final report.
-- Ask the user only for important or high-risk decisions, for the choice of ideas and mockups in Quick ideas, and for the idea approval in the Idea flow.
+- Ask the user only for important or high-risk decisions, for the choice of ideas and mockups in Quick ideas, for the idea approval and the open questions of the planner in the Idea flow, and for the next step if no idea remains or the selection does not fit.
 - Before you ask, start the tasks that do not need the answer. Subagents continue while you wait for the answer.
 - Put all questions in one AskUserQuestion call. The phone of the user gets a notification.
 - Write each open question in the "Waiting for user" section of the progress file.
