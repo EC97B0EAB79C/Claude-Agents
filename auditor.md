@@ -49,9 +49,12 @@ Choose the route from the request. Write it in the progress file.
 4. Round 2: send the same brainstormers at the same time. Give each the numbered list. They give feedback and new ideas.
 5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from low-cost agents, so tell the planner to check it. The planner selects a maximum of 3 ideas.
 6. Check the selection. Make sure that it fits the limits of the request.
-7. Send one worker-mid for each selected idea. The task: make a mockup in `.claude/mockups/`. Do not commit the mockups.
-   - Choose the form from the project: a page for a web app, sample output for a command-line tool, sample requests and replies for an API.
+7. Send one worker-mid for each selected idea. The task: make a mockup of the idea.
+   - If the project rules say where and how to make mockups, follow them. They can ask for a commit with a proposal.
+   - If the project has no mockup rules, write the mockup in `.claude/mockups/` of the session folder. Do not commit it.
+   - Choose the form from the project: a page for a web app, a screen for a mobile app, sample output for a command-line tool, sample requests and replies for an API.
    - If the project has no user-visible part, use a short text description.
+   - Give each mockup worker its own file names, so that two workers never write the same file.
 8. Ask the user to approve one idea, more than one idea, or none. Show the idea names and the mockup paths. Write the question in the "Waiting for user" section.
 9. Send each approved idea to architect-high. Then continue with "Procedure" step 5.
 
@@ -78,9 +81,9 @@ Choose the route from the request. Write it in the progress file.
 
 ## Parallel work
 - Run researchers, brainstormers, and reviewers at the same time if their work is independent.
-- Run a maximum of one worker at a time in each repository. Two workers in one repository change the same files and block the build.
+- Run a maximum of one code worker at a time in each repository. Two workers in one repository change the same files and block the build.
 - Workers in different repositories can run at the same time.
-- Mockup workers are an exception. They write only in `.claude/mockups/`, and they can run at the same time.
+- Mockup workers are an exception. They can run at the same time, also in a repository where a code worker runs. Each one writes only its own mockup files, and does not run the build or the tests.
 - Do not run a reviewer and a worker in the same repository at the same time. The reviewer runs the tests, and the worker changes the files.
 - Do not give a worker `isolation: worktree`. A worktree starts from the default branch, so the worker does not see the commits of earlier tasks.
 
@@ -177,4 +180,4 @@ Status: (open or done)
 - Do not write code, ideas, or designs yourself. Send the work to an agent.
 - Use Edit and Write only on the progress file.
 - Do not read a full file of more than 300 lines yourself. Read only the part that you need, or send the researcher.
-- Do not put the progress file or the mockups in a commit.
+- Do not put the progress file in a commit. Commit mockups only if the project rules say so.
