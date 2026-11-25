@@ -34,12 +34,22 @@ Choose the route from the request. Write it in the progress file.
 | Bug in an unknown place | researcher, then architect-low, then the workers. |
 | Small feature with a clear goal | architect-low, then the workers. |
 | Large, risky, or unclear change | architect-high, then the workers. |
-| Open request ("propose", "improve", "ideas") | Idea flow, then architect-high, then the workers. |
+| Small open request about one screen or one feature | Quick ideas, then the route of the selected work. |
+| Open request about a larger topic ("propose", "improve", "ideas"): more than one screen or feature, or the user asks for many ideas | Idea flow, then architect-high, then the workers. |
 
 - If the request is important (see below) or touches more than 3 files, use architect-high. Use architect-low in all other cases.
+- If you do not know the number of files, start with architect-low. It reports ESCALATE if the work is too large.
 - If architect-low reports ESCALATE, send the same job to architect-high.
 - Send each task to the worker for its difficulty: EASY to worker-low, MEDIUM to worker-mid, HARD to worker-high.
 - For a simple bug fix, write the difficulty yourself (EASY). In all other cases, use the difficulty from the architect.
+
+## Quick ideas
+1. Send one brainstormer-web with the topic, the files, and the limits. Ask for a maximum of 5 ideas, each with the file and line of the problem.
+2. Check each idea against the code. Remove an idea that is not true.
+3. Show the ideas to the user. Ask which ideas the user selects. Ask if the user wants mockups of them. Write the questions in the "Waiting for user" section.
+4. If the user wants mockups, continue with "Idea flow" steps 7 to 9.
+   - Then, or if the user wants no mockups, choose the route of each selected idea from the route table. For example, use architect-low for a small feature.
+- If the topic is larger than one screen or one feature, or the user asks for many ideas, use the Idea flow.
 
 ## Idea flow
 1. Send the researcher for the facts of the project. Give it the topic.
@@ -55,8 +65,11 @@ Choose the route from the request. Write it in the progress file.
    - Choose the form from the project: a page for a web app, a screen for a mobile app, sample output for a command-line tool, sample requests and replies for an API.
    - If the project has no user-visible part, use a short text description.
    - Give each mockup worker its own file names, so that two workers never write the same file.
-8. Ask the user to approve one idea, more than one idea, or none. Show the idea names and the mockup paths. Write the question in the "Waiting for user" section.
-9. Send each approved idea to architect-high. Then continue with "Procedure" step 5.
+8. Show the user each idea name and its mockup path. Ask the user to choose for each idea: approve, change, or drop. Write the question in the "Waiting for user" section.
+9. If the user asks for a change, send it to a mockup worker with the user's words, the mockup path, and the idea. Then ask again (step 8).
+   - A change can ask for variants, for example "show 3 places for the icon".
+   - Write each round in the "Ideas" section of the progress file.
+10. Send each approved idea to architect-high. Then continue with "Procedure" step 5.
 
 ## Procedure
 1. Read the request. Find the goal and the limits.
@@ -70,7 +83,9 @@ Choose the route from the request. Write it in the progress file.
 7. If the change is important (see below), send it to the reviewer in the review format.
    - If the change touches keys, encryption, backups, or stored data, set the effort of the reviewer to xhigh.
 8. If a result is not correct, send it back with the fault. Write the count in the progress file.
-   - After the first fault, send the task to the worker of the next higher level. If the worker is worker-high, send it to worker-high again.
+   - If the fault is small (a missed line, a wrong word, a check that the worker did not run), send it to the same worker level.
+   - If the worker did not understand the task, the fault is in the design, or the worker reported BLOCKED, send it to the next higher level. If the worker is worker-high, send it to worker-high again.
+   - A new worker does not know the earlier work. Give it the fault and the diff command of that work. Tell it to keep or remove that work.
 9. When a task passes:
    - In the repository of the task, commit only the files of the task (`git add <files>`, not `git add -A`).
    - Write the commit message as the project rules say.
@@ -91,7 +106,7 @@ Choose the route from the request. Write it in the progress file.
 1. Send one researcher for each repository at the same time. Ask each one if the fault is in its repository, and where.
 2. Fix one repository first. Use the repository where the user found the fault.
 3. Check the result. If the change is important, get a PASS from the reviewer.
-4. Then send one worker for each other repository at the same time. In **Context**, give the diff command of the first fix.
+4. Then send one worker for each other repository at the same time. Use the worker level of the first fix. In **Context**, give the diff command of the first fix.
 5. If the project rules say that a file is shared, copy the changed file to the other repositories. Change only the lines that the rules let be different.
 6. Commit in each repository on the same branch.
 
@@ -119,7 +134,7 @@ A change is important if one or more of these items is true:
 
 ## Decisions
 - For small questions, use the best choice. Write it in the progress file and in the final report.
-- Ask the user only for important or high-risk decisions, and for the idea approval in the Idea flow.
+- Ask the user only for important or high-risk decisions, for the choice of ideas and mockups in Quick ideas, and for the idea approval in the Idea flow.
 - Before you ask, start the tasks that do not need the answer. Subagents continue while you wait for the answer.
 - Put all questions in one AskUserQuestion call. The phone of the user gets a notification.
 - Write each open question in the "Waiting for user" section of the progress file.
@@ -144,7 +159,7 @@ Status: (open or done)
 (The request from the user.)
 
 ## Route
-(Simple fix, bug in unknown place, small feature, large change, or idea flow.)
+(Simple fix, bug in unknown place, small feature, large change, quick ideas, or idea flow.)
 
 ## Repos and branch
 - Branch: (name)

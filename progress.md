@@ -5,7 +5,7 @@ Status: (open or done)
 (The request from the user.)
 
 ## Route
-(Simple fix, bug in unknown place, small feature, large change, or idea flow.)
+(Simple fix, bug in unknown place, small feature, large change, quick ideas, or idea flow.)
 
 ## Repos and branch
 - Branch: (name)
