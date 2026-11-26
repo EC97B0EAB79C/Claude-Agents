@@ -24,6 +24,9 @@ Status: (open or done)
 - [x] 3. (Task) - HARD - done, commit abc123
 - [!] 4. (Task) - EASY - blocked: (reason)
 
+## Delegation log
+- #1 (Task) -> worker (haiku), simple fix, done
+
 ## Decisions
 - (Choice and short reason.)
 
