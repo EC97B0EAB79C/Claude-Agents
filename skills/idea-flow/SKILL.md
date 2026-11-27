@@ -13,9 +13,9 @@ Do these steps in order. Use the limits of the auditor. Log each delegation in t
    - If the topic is large and you do not send brainstormer-web, send more than one brainstormer-high in the same way.
 3. Collect the ideas in one numbered list. Do not judge or remove an idea. Do not show which agent gave it.
 4. Round 2: send the same brainstormers at the same time. Give each the numbered list. They give feedback and new ideas.
-5. Collect the new ideas in the same list. Send the list with the feedback to the planner. The feedback comes from agents that use low or medium effort, so tell the planner to check it. The planner selects the ideas that fit the limits.
-6. Check the selection. Make sure that it fits the limits of the request.
-   - If it does not fit, send it back to the planner one time with the reason.
+5. Collect the new ideas in the same list. For a large topic, set the planner model to opus. Send the list with the feedback to the planner. The feedback comes from agents that use low or medium effort, so tell the planner to check it. The planner selects the ideas that fit the limits.
+6. Tell the planner to check its selection against the limits of the request. Read the planner report. Do not repeat the check.
+   - If the planner reports that the selection does not fit, send it back one time with the reason.
    - If it still does not fit, show the ideas to the user with the problem. Ask how to continue.
 7. Send one worker (model sonnet) for each selected idea. The task: make a mockup of the idea.
    - If the project rules say where and how to make mockups, follow them. They can ask for a commit with a proposal.
