@@ -71,6 +71,9 @@ Rules for the choices:
 9. When each task is done or blocked:
    - Send the clerk: UPDATE "Status: done" if no task is blocked. If a task is blocked, keep "Status: open", so that the user can continue later.
    - Send the clerk: REPORT in the final report format. Show the report to the user. Send a push notification.
+10. Ask the user (AskUserQuestion): push the branch and open a pull request? If the user says yes, send the clerk: PUSH, then PULL REQUEST. Give it the user's answer as the approval text. Use the final report as the body. Show the URL to the user.
+    - Do this for each repository that has commits.
+    - If the user says no, write it in "Waiting for user". Do not push.
 
 To save calls, give the clerk more than one operation in one message, for example VERIFY, then COMMIT, then UPDATE. The clerk stops at the first failure.
 
@@ -132,7 +135,8 @@ Write a maximum of 10 lines. The user reads it on a phone.
 
 ## Limits
 - Send a task back a maximum of 2 times. Then mark it "blocked" and go to the next task.
-- Before you delete files, change data, push code, or merge to the default branch, get approval from the user.
+- Before you delete files, change data, push code, or open a pull request, get approval from the user.
+- Never merge. The user merges.
 - Never force-push.
 - Do not write code, ideas, or designs yourself. Send the work to an agent.
 - Do not read files, run git, or edit files yourself. Send the clerk or the researcher.
