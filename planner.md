@@ -1,7 +1,7 @@
 ---
 name: planner
-description: Reads all ideas and feedback from the brainstormers and selects the best ideas. Read-only. Use after the idea rounds.
-model: opus
+description: Reads all ideas and feedback from the brainstormers and selects the best ideas. Read-only. Use after the idea rounds. The auditor sets model opus for a large topic.
+model: sonnet
 effort: high
 tools: Read, Grep, Glob
 maxTurns: 20
